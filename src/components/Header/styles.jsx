@@ -10,7 +10,7 @@ const TitleStyled = styled(Title) `
 const RowContainerStyled = styled(Row)`
     align-items: center;
     padding: 20px;
-    background-color: ${purple[3]};
+    background-color: ${purple[5]};
 `
 
 export { TitleStyled, RowContainerStyled }
