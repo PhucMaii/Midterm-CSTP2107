@@ -36,7 +36,7 @@ export default function CategoryCarousel() {
                                 </Col>
                                 <Col>
                                     <PlayButtonStyled 
-                                        onClick={() => navigate(`/home/quiz/${category.name}`)}
+                                        onClick={() => navigate(`/quiz/${category.name}`)}
                                         $activeIndex={activeIndex === index} 
                                         twoToneColor='rgba(0, 0, 0, 0)'
                                     />

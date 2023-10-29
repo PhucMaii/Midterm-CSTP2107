@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { Col, Progress, Row, Space, Typography } from "antd";
 import { CardContainer, ContainerStyled, ImageStyled } from "./styles";
 
 export default function QuizCategoryCard({quiz}) {
     const { Title } = Typography;
+    const navigate = useNavigate();
+
     return (
-        <ContainerStyled>
+        <ContainerStyled onClick={() => navigate(`/quiz/${quiz.quizName}`)}>
             <CardContainer 
                 align="middle"
                 gutter={[8, 0]} 
