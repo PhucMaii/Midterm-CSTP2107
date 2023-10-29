@@ -1,12 +1,14 @@
 import { PlayCircleTwoTone } from "@ant-design/icons";
+import { Typography } from "antd";
 import styled from "styled-components";
 
+const { Title } = Typography;
 const CategoryContainerStyled = styled.div`
-    background-image: url('https://miro.medium.com/v2/resize:fit:770/1*F20fM4cjs0LqvbaZ8BN2oA.jpeg');
+    background-image: url(${(props) => props.$image});
     background-repeat: no-repeat;
     background-position: center;
     background-color: white;
-    background-size: ${(props) => props.$activeIndex ? '300px' : '250px'};
+    background-size: ${(props) => props.$activeIndex ? '400px' : '400px'};
     padding: 10px;
     width: 40vw;
     height: ${(props) => props.$activeIndex ? '230px' : '200px'};
@@ -29,5 +31,8 @@ const PlayButtonStyled = styled(PlayCircleTwoTone)`
     background-color: white;
     font-size: 50px;
 `
+const TitleStyled = styled(Title)`
+    color: #ffffff !important;
+`
 
-export { CategoryContainerStyled, ContainerStyled, PlayButtonStyled }
+export { CategoryContainerStyled, ContainerStyled, PlayButtonStyled, TitleStyled }

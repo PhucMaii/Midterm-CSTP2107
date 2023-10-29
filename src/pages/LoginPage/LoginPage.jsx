@@ -6,7 +6,7 @@ import { auth, db } from '../../../firebase.config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { useNavigate } from 'react-router';
-import useLocalStorage from '../../utils/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
