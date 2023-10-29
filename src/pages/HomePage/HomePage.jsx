@@ -1,16 +1,16 @@
 
+import { useEffect, useState } from "react";
 import { Col, Row, Typography } from "antd";
+import { MehOutlined } from "@ant-design/icons";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { ContainerStyled, NotificationStyled, RowStyled } from "./styles";
+import { db } from "../../../firebase.config";
+import { categoriesEnum } from "../../utils/constant";
 import CategoryCarousel from "../../components/Carousel/CategoryCarousel";
 import Header from "../../components/Header/Header";
 import Navbar from "../../components/Navbar/Navbar";
 import QuizCategoryCard from "../../components/QuizCategoryCard/QuizCategoryCard";
-import { ContainerStyled, NotificationStyled, RowStyled } from "./styles";
-import { useEffect, useState } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../../firebase.config";
-import { MehOutlined } from "@ant-design/icons";
-import { categoriesEnum } from "../../utils/constant";
 
 export default function HomePage() {
     const [recentQuiz, setRecentQuiz] = useState([]);
