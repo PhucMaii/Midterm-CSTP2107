@@ -35,7 +35,6 @@ export default function QuizCategoryCard({quiz}) {
                             type="circle" 
                         />
                     </Space>
-
                 </Col>
             </CardContainer>     
         </ContainerStyled>
