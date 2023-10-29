@@ -17,7 +17,7 @@ const RowContainerStyled = styled(Row)`
     height: 30vh;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     @keyframes gradient {
         0% {
             background-position: 0% 50%;
