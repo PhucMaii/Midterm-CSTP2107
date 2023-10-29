@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ColStyled = styled(Col)`
     text-align: center;
+    color: ${(props) => props.$isTab ? "#1d39c4" : "black" }
 `
 const ContainerStyled = styled.div`
     position: fixed;

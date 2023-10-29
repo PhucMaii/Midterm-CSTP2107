@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Col, Row, Typography } from "antd";
+import { Col, Row, Spin, Typography } from "antd";
 import { MehOutlined } from "@ant-design/icons";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { ContainerStyled, NotificationStyled, RowStyled } from "./styles";
@@ -14,6 +14,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function HomePage() {
     const [recentQuiz, setRecentQuiz] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [curUser, _setCurUser] = useLocalStorage('current-user', {});
     const quizCollection = collection(db, 'quizzes');
     const quizQuery = query(quizCollection, where('userId', '==', curUser.docId));
@@ -23,6 +24,7 @@ export default function HomePage() {
     }, [])
 
     const fetchRecentQuiz = async () => {
+        setIsLoading(true);
         try{
             const newRecentQuiz = [];
             const querySnapshot = await getDocs(quizQuery);
@@ -39,7 +41,9 @@ export default function HomePage() {
                 newRecentQuiz.slice(0, 9);
             }
             setRecentQuiz(newRecentQuiz);
+            setIsLoading(false)
         } catch(error) {
+            setIsLoading(false);
             console.log(error);
         }
     }
@@ -47,29 +51,39 @@ export default function HomePage() {
     const { Title } = Typography;
     return (
         <ContainerStyled>
-            <Header />
-            <CategoryCarousel />
-            <RowStyled >
-                <Col span={24}>
-                    <Title level={3}>Recent Quiz</Title>
-                </Col>
-            </RowStyled>
             {
-                recentQuiz.length > 0 ? recentQuiz.map((quiz, index) => {
-                    return (
-                        <RowStyled key={index}>
-                            <QuizCategoryCard quiz={quiz} />
+                isLoading ? (
+                    <ContainerStyled style={{display: 'flex', justifyContent: 'center', marginTop: '40%'}}>
+                        <Spin size="large" />
+                    </ContainerStyled>
+                ) : (
+                    <>
+                        <Header />
+                        <CategoryCarousel />
+                        <RowStyled >
+                            <Col span={24}>
+                                <Title level={3}>Recent Quiz</Title>
+                            </Col>
                         </RowStyled>
-                    )
-                }) : (
-                    <RowStyled justify="center">
-                        <NotificationStyled level={4}><MehOutlined  /> No Data Found</NotificationStyled>
-                    </RowStyled>
+                        {
+                            recentQuiz.length > 0 ? recentQuiz.map((quiz, index) => {
+                                return (
+                                    <RowStyled key={index}>
+                                        <QuizCategoryCard quiz={quiz} />
+                                    </RowStyled>
+                                )
+                            }) : (
+                                <RowStyled justify="center">
+                                    <NotificationStyled level={4}><MehOutlined  /> No Data Found</NotificationStyled>
+                                </RowStyled>
+                            )}
+                        <Row>
+                            <Navbar />
+                        </Row>
+                    </>
                 )
             }
-            <Row>
-                <Navbar />
-            </Row>
+           
         </ContainerStyled>
     )
 }
