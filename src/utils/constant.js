@@ -12,10 +12,6 @@ export const categoriesEnum = [
         image: '/public/image/devops.jpeg'
     },
     {
-        name: 'Docker',
-        image: '/public/image/docker.jpg'
-    },
-    {
         name: 'Code',
         image: '/public/image/code.jpeg'
     }
