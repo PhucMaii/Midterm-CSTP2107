@@ -52,12 +52,12 @@ export default function LoginPage() {
                 navigate('/home');
                 setIsLoading(false);
             } else {
+                setIsLoading(false);
                 setNotification({
                     on: true,
                     type: 'error',
                     message: error.code
                 })
-                setIsLoading(false)
             }
         }
     }
@@ -80,7 +80,7 @@ export default function LoginPage() {
                         <Alert message={notification.message} type={notification.type} showIcon closable />
                     )
                 }
-                <Form.Item label="Email">
+                <Form.Item label="User name">
                     <Input 
                         placeholder="Enter your username..."
                         value={userData.username}
