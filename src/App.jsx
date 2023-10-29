@@ -6,6 +6,7 @@ import QuizPage from './pages/QuizPage/QuizPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import { useEffect, useState } from 'react';
 import { Typography } from 'antd';
+import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/quiz/:category" element={<QuizPage />}/>
             <Route path="/search" element={<SearchPage />}/>
+            <Route path="/ranking-board" element={<LeaderboardPage />}/>
           </Routes>
 
         )
