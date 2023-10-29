@@ -1,22 +1,18 @@
 export const categoriesEnum = [
     {
         name: 'Linux',
-        image: '/public/image/linux.jpg'
+        image: '/image/linux.jpg'
     },
     {
         name: 'SQL',
-        image: '/public/image/sql.jpg'
+        image: '/image/sql.jpg'
     },
     {
         name: 'DevOps',
-        image: '/public/image/devops.jpeg'
-    },
-    {
-        name: 'Docker',
-        image: '/public/image/docker.jpg'
+        image: '/image/devops.jpeg'
     },
     {
         name: 'Code',
-        image: '/public/image/code.jpeg'
+        image: '/image/code.jpeg'
     }
 ]

@@ -82,6 +82,13 @@ export default function LoginPage() {
                 }
                 <Form.Item label="Email">
                     <Input 
+                        placeholder="Enter your username..."
+                        value={userData.username}
+                        onChange={(e) => setUserData({...userData, username: e.target.value})}
+                    />
+                </Form.Item>
+                <Form.Item label="Email">
+                    <Input 
                         placeholder="Enter your email..."
                         value={userData.email}
                         onChange={(e) => setUserData({...userData, email: e.target.value})}

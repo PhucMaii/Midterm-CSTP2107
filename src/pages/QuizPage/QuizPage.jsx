@@ -21,7 +21,6 @@ import ResultModal from '../../components/Modals/ResultModal';
 import CancelModal from '../../components/Modals/CancelModal';
 
 const apiKey = import.meta.env.VITE_API_KEY;
-const totalQuizzes = 10;
 
 export default function QuizPage() {
     const [currentAnswer, setCurrentAnswer] = useState('');
@@ -35,7 +34,7 @@ export default function QuizPage() {
     const navigate = useNavigate();
     const [curUser, setCurUser] = useLocalStorage('current-user', {});
     const { category } = useParams();
-
+    const totalQuizzes = category === "Docker" ? 5 : 10;
     const quizCollection = collection(db, 'quizzes');
     const userCollection = collection(db, 'users');
     const userRef = doc(userCollection, curUser.docId);
@@ -89,7 +88,7 @@ export default function QuizPage() {
     }
 
     const handleNextButton = async (index) => {
-        if(index < 9) {
+        if(index < totalQuizzes - 1) {
             setShowAnswer(false); 
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             return;
@@ -99,7 +98,7 @@ export default function QuizPage() {
             const userDoc = await getDoc(userRef);
             const userData = userDoc.data();
             let userScore = userData.score || 0;
-            userScore += record;
+            userScore += Math.floor(record / totalQuizzes * 100);
             const data = {
                 currentRecord: record,
                 isDone: record === totalQuizzes,
