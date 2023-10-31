@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import { Row, Typography } from 'antd';
 import styled from 'styled-components';
 
 const { Title } = Typography;
@@ -7,5 +7,7 @@ const LeaderboardTitle = styled(Title)`
     text-align: center;
     margin: 0 !important;
 `
-
-export { LeaderboardTitle }
+const UserRankingContainer = styled(Row)`
+    padding: 10px;
+`
+export { LeaderboardTitle, UserRankingContainer}
