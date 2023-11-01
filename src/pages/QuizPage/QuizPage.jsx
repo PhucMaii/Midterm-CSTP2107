@@ -14,7 +14,17 @@ import {
 } from './styles';
 import { RowContainerStyled } from '../../components/Header/styles';
 import { ContainerStyled } from '../HomePage/styles';
-import { Timestamp, addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { 
+    Timestamp, 
+    addDoc, 
+    collection, 
+    doc, 
+    getDoc, 
+    getDocs, 
+    query, 
+    updateDoc, 
+    where 
+} from 'firebase/firestore';
 import { db } from '../../../firebase.config';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import ResultModal from '../../components/Modals/ResultModal';

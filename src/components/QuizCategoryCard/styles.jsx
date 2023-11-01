@@ -4,7 +4,7 @@ import styled from "styled-components";
 const CardContainer = styled(Row)`
     flex-direction: row;
 `
-const ContainerStyled = styled.div`
+const QuizCategoryContainer = styled.div`
     padding: 0px 20px 20px 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 20px;
@@ -17,4 +17,4 @@ const ImageStyled = styled.img`
     border-radius: 15px;
 `
 
-export { CardContainer, ContainerStyled, ImageStyled }
+export { CardContainer, QuizCategoryContainer, ImageStyled }
