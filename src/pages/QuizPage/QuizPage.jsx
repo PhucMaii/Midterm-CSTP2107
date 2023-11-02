@@ -42,7 +42,8 @@ export default function QuizPage() {
     const [record, setRecord] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
     const navigate = useNavigate();
-    const [curUser, setCurUser] = useLocalStorage('current-user', {});
+    // eslint-disable-next-line no-unused-vars
+    const [curUser, _setCurUser] = useLocalStorage('current-user', {});
     const { category } = useParams();
     const totalQuizzes = category === "Docker" ? 5 : 10;
     const quizCollection = collection(db, 'quizzes');
@@ -56,6 +57,7 @@ export default function QuizPage() {
     
     useEffect(() => {
         fetchQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const fetchQuizzes = async () => {

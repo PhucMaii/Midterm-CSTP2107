@@ -7,8 +7,10 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { useNavigate } from 'react-router';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import AddMoreInfoModal from '../../components/Modals/AddMoreInfoModal';
 
 export default function LoginPage() {
+    const [isOpenAddMoreInfo, setIsOpenAddMoreInfo] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [userData, setUserData] = useState({
         email: '',
@@ -19,10 +21,12 @@ export default function LoginPage() {
         message: '',
         type: 'success'
     });
+    // eslint-disable-next-line no-unused-vars
     const [_curUser, setCurUser] = useLocalStorage('current-user', {});
     const navigate = useNavigate();
-    const { Title } = Typography;
     const userCollection = collection(db, 'users');
+    const { Title } = Typography;
+
     const handleRegister = async () => {
         if(userData.password.length < 6) {
             setNotification({
@@ -35,32 +39,35 @@ export default function LoginPage() {
         setIsLoading(true);
         try {
             let docId;
+            let data;
             const userQuery = query(userCollection, where('email', '==', userData.email));
             const querySnapshot = await getDocs(userQuery);
             querySnapshot.forEach((doc) => {
                 docId = doc.id;
+                data = doc.data();
             });
             await signInWithEmailAndPassword(auth, userData.email, userData.password);
-            setCurUser({...userData, docId })
+            setCurUser({...data, docId})
             navigate('/home');
             setIsLoading(false);
         } catch(error) {
+            setIsLoading(false);
             if(error.code === 'auth/invalid-login-credentials') {
                 await createUserWithEmailAndPassword(auth, userData.email, userData.password);
                 const docRef = await addDoc(userCollection, userData);
                 setCurUser({...userData, docId: docRef._key.path.segments[1]});
-                navigate('/home');
-                setIsLoading(false);
+                setIsOpenAddMoreInfo(true);
             } else {
-                setIsLoading(false);
                 setNotification({
                     on: true,
                     type: 'error',
                     message: error.code
                 })
             }
+            console.log(error.code);
         }
     }
+
     if(isLoading) {
         return (
             <ContainerStyled>
@@ -70,25 +77,22 @@ export default function LoginPage() {
     }
     return (
         <ContainerStyled>
+            <AddMoreInfoModal 
+                open={isOpenAddMoreInfo}
+                setOpen={setIsOpenAddMoreInfo}
+            />
             <FormStyled
                 layout='vertical'
             >
-
                 <Title level={4}>Welcome to QuizApp</Title>
                 {
                     notification.on && (
                         <Alert message={notification.message} type={notification.type} showIcon closable />
                     )
                 }
-                <Form.Item label="User name">
-                    <Input 
-                        placeholder="Enter your username..."
-                        value={userData.username}
-                        onChange={(e) => setUserData({...userData, username: e.target.value})}
-                    />
-                </Form.Item>
                 <Form.Item label="Email">
                     <Input 
+                        required
                         placeholder="Enter your email..."
                         value={userData.email}
                         onChange={(e) => setUserData({...userData, email: e.target.value})}
@@ -96,6 +100,7 @@ export default function LoginPage() {
                 </Form.Item>
                 <Form.Item label="Password">
                     <Input.Password
+                        required
                         placeholder="Enter your password..." 
                         value={userData.password}
                         onChange={(e) => setUserData({...userData, password: e.target.value})}

@@ -17,7 +17,6 @@ export default function CancelModal({
             <Button type="primary" key="submit" onClick={handleLeave}>Leave</Button>,
         ]}
     >
-        
     </ModalStyled>
   )
 }

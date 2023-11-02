@@ -28,7 +28,6 @@ export default function LeaderboardPage() {
         const data = doc.data();
         newUsersList.unshift(data);
       })
-      console.log(newUsersList[0]);
       setUsersList(newUsersList);
       setIsLoading(false);
     } catch(error) {
@@ -58,7 +57,7 @@ export default function LeaderboardPage() {
             </RowContainerStyled>
             <UserRankingContainer>
               {
-                usersList.map((user, index) => {
+                usersList.slice(3).map((user, index) => {
                   return (
                     <UserRanking 
                       key={index}  

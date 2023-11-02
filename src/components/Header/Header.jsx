@@ -3,6 +3,7 @@ import { RowContainerStyled, TitleStyled } from "./styles";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function Header() {
+    // eslint-disable-next-line no-unused-vars
     const [curUser, _setCurUser] = useLocalStorage('current-user', {});
     return (
         <RowContainerStyled style={{alignItems: 'start'}}>
