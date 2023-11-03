@@ -7,6 +7,8 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import { useEffect, useState } from 'react';
 import { Typography } from 'antd';
 import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
+import ProtectedRoutes from './Routes/ProtectedRoute';
+import UnprotectedRoutes from './Routes/UnprotectedRoute';
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -25,11 +27,15 @@ function App() {
           </div>
         ) : (
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/quiz/:category" element={<QuizPage />}/>
-            <Route path="/search" element={<SearchPage />}/>
-            <Route path="/ranking-board" element={<LeaderboardPage />}/>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/quiz/:category" element={<QuizPage />}/>
+              <Route path="/search" element={<SearchPage />}/>
+              <Route path="/ranking-board" element={<LeaderboardPage />}/>
+            </Route>
+            <Route element={<UnprotectedRoutes />}>
+              <Route path="/" element={<LoginPage />} />
+            </Route>
           </Routes>
         )
       }
