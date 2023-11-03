@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import AddMoreInfoModal from '../../components/Modals/AddMoreInfoModal';
 
+const { Title } = Typography;
+
 export default function LoginPage() {
     const [isOpenAddMoreInfo, setIsOpenAddMoreInfo] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +27,6 @@ export default function LoginPage() {
     const [_curUser, setCurUser] = useLocalStorage('current-user', {});
     const navigate = useNavigate();
     const userCollection = collection(db, 'users');
-    const { Title } = Typography;
 
     const handleRegister = async () => {
         if(userData.password.length < 6) {
@@ -47,7 +48,7 @@ export default function LoginPage() {
                 data = doc.data();
             });
             await signInWithEmailAndPassword(auth, userData.email, userData.password);
-            setCurUser({...data, docId})
+            setCurUser({...data, docId});
             navigate('/home');
             setIsLoading(false);
         } catch(error) {
